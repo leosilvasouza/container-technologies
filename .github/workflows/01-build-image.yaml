@@ -25,7 +25,10 @@ jobs:
           curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
           unzip sonar-scanner.zip
           mv sonar-scanner-4.8.0.2856-linux sonar-scanner
-          export PATH="$PATH:${{ github.workspace }}/sonar-scanner/bin"
+        shell: bash
+
+      - name: Add SonarScanner to PATH
+        run: echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: Run SonarCloud Analysis
         run: |
