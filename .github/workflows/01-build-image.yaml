@@ -20,16 +20,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: SonarCloud Code Analysis
-        uses: SonarSource/sonarcloud-github-action@v1
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
-        with:
-          args: >
-            -Dsonar.projectKey=container-technologies-and-devsecops
-            -Dsonar.organization=leosilvasouza
-            -Dsonar.host.url=https://sonarcloud.io
+      - name: Download and Install SonarScanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+          unzip sonar-scanner.zip
+          export PATH="$PATH:/github/workspace/sonar-scanner-4.8.0.2856-linux/bin"
+          
+      - name: Run SonarCloud Analysis
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=container-technologies-and-devsecops \
+            -Dsonar.organization=leosilvasouza \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   build-image:
