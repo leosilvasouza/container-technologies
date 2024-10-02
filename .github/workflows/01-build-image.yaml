@@ -39,6 +39,7 @@ jobs:
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         env:
           JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
+          SONAR_SCANNER_OPTS: "-Djava.home=${{ steps.setup-java.outputs.java-home }}"
 
   build-image:
     runs-on: ubuntu-latest
