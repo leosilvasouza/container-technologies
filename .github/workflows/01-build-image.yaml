@@ -40,7 +40,7 @@ jobs:
             -X  # Modo debug ativado
         env:
           JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
-          SONAR_SCANNER_OPTS: "-Djava.home=${{ steps.setup-java.outputs.java-home }}"
+          SONAR_SCANNER_OPTS: "-D java.home=${{ steps.setup-java.outputs.java-home }}"
 
   build-image:
     runs-on: ubuntu-latest
