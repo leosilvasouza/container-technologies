@@ -36,11 +36,10 @@ jobs:
             -Dsonar.projectKey=container-technologies-and-devsecops \
             -Dsonar.organization=leosilvasouza \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -X  # Modo debug ativado
         env:
           JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
-          SONAR_SCANNER_OPTS: "-D java.home=${{ steps.setup-java.outputs.java-home }}"
 
   build-image:
     runs-on: ubuntu-latest
